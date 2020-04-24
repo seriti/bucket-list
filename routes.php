@@ -7,7 +7,7 @@ copy the "/bucket" group into the existing "/admin" group within existing "src/r
 
 $app->group('/admin', function () {
 
-    $$this->group('/bucket', function () {
+    $this->group('/bucket', function () {
         $this->any('/bucket', \App\Bucket\BucketController::class);
         $this->any('/bucket_note', \App\Bucket\BucketNoteController::class);
         $this->any('/bucket_file', \App\Bucket\BucketFileController::class);
