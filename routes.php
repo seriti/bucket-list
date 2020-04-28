@@ -18,7 +18,7 @@ $app->group('/admin', function () {
 
 
 
-})->add(\App\ConfigAdmin::class);
+})->add(\App\User\ConfigAdmin::class);
 
 
 
