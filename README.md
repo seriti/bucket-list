@@ -22,7 +22,7 @@ That said, if you are an experienced PHP programmer you will have no problem doi
     Make sure that you have thsi working before you proceed.
 
 2.) Download a copy of Information Bucket module source code directly from github and unzip,  
-or by using **git clone https://github.com/seriti/info-bucket** from command line.  
+or by using **git clone https://github.com/seriti/bucket-list** from command line.  
 Once you have a local copy of module code check that it has following structure:  
 
 /Bucket/(all module implementation classes are in this folder)  
