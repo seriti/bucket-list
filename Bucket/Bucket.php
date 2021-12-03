@@ -39,13 +39,14 @@ class Bucket extends Table
         $this->addTableCol(array('id'=>'status','type'=>'STRING','title'=>'Status'));
 
 
-        $this->addSortOrder('T.date_create DESC','Create date DESC','DEFAULT');
+        $this->addSortOrder('T.`date_create` DESC','Create date DESC','DEFAULT');
 
-        $this->addSql('WHERE','T.access_level >= "'.$this->access_rank.'" ');
+        $this->addSql('WHERE','T.`access_level` >= "'.$this->access_rank.'" ');
 
 
-        $this->setupFiles(array('table'=>TABLE_PREFIX.'file','location'=>$this->location_base,'max_no'=>1000,'icon'=>'<img src="/images/folder.png" border="0">manage',
-                                'list'=>true,'list_no'=>100,
+        $this->setupFiles(array('table'=>TABLE_PREFIX.'file','location'=>$this->location_base,'max_no'=>1000,
+                                'icon'=>'<img src="/images/folder.png" border="0">manage',
+                                'list'=>true,'list_no'=>100,'search'=>true,
                                 'link_url'=>'bucket_file','link_data'=>'SIMPLE','width'=>'800','height'=>'720'));
 
         $this->addAction(array('type'=>'edit','text'=>'edit','icon'=>false,'verify'=>true));
@@ -84,13 +85,13 @@ class Bucket extends Table
 
         $location_id = $this->location_base.$id;
         
-        $sql = 'SELECT COUNT(*) FROM '.TABLE_PREFIX.'file '.
-               'WHERE location_id = "'.$this->db->escapeSql($location_id).'" ';
+        $sql = 'SELECT COUNT(*) FROM `'.TABLE_PREFIX.'file` '.
+               'WHERE `location_id` = "'.$this->db->escapeSql($location_id).'" ';
         $count = $this->db->readSqlValue($sql);
         if($count != 0) $error_tmp .= $count.' documents found in bucket. ';
 
-        $sql = 'SELECT COUNT(*) FROM '.TABLE_PREFIX.'note '.
-               'WHERE location_id = "'.$this->db->escapeSql($location_id).'" ';
+        $sql = 'SELECT COUNT(*) FROM `'.TABLE_PREFIX.'note` '.
+               'WHERE `location_id` = "'.$this->db->escapeSql($location_id).'" ';
         $count = $this->db->readSqlValue($sql);
         if($count != 0) $error_tmp .= $count.' notes found in bucket.';
 
@@ -100,11 +101,11 @@ class Bucket extends Table
     protected function afterUpdate($id,$edit_type,$form) {
               
         if($edit_type === 'INSERT') {
-            $sql = 'UPDATE '.$this->table.' SET date_create = CURDATE() , access_level = "'.ACCESS_RANK[$form['access']].'" '.
-                   'WHERE '.$this->key['id'].' = "'.$this->db->escapeSql($id).'" ';
+            $sql = 'UPDATE `'.$this->table.'` SET `date_create` = CURDATE() , `access_level` = "'.ACCESS_RANK[$form['access']].'" '.
+                   'WHERE `'.$this->key['id'].'` = "'.$this->db->escapeSql($id).'" ';
         } else {
-            $sql = 'UPDATE '.$this->table.' SET access_level = "'.ACCESS_RANK[$form['access']].'" '.
-                   'WHERE '.$this->key['id'].' = "'.$this->db->escapeSql($id).'" ';
+            $sql = 'UPDATE `'.$this->table.'` SET `access_level` = "'.ACCESS_RANK[$form['access']].'" '.
+                   'WHERE `'.$this->key['id'].'` = "'.$this->db->escapeSql($id).'" ';
         }
 
         $this->db->executeSql($sql,$error_tmp);  

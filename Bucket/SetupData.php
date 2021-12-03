@@ -60,7 +60,7 @@ class SetupData extends SetupModuledata
                             ) ENGINE=MyISAM DEFAULT CHARSET=utf8');  
 
         //initialisation
-        $this->addInitialSql('INSERT INTO `TABLE_PREFIXbucket` (name,description,date_create,status,access,access_level) '.
+        $this->addInitialSql('INSERT INTO `TABLE_PREFIXbucket` (`name`,`description`,`date_create`,`status`,`access`,`access_level`) '.
                              'VALUES("My Bucket","My first bucket",CURDATE(),"OK","USER",2)');
 
         //updates use time stamp in ['YYYY-MM-DD HH:MM'] format, must be unique and sequential

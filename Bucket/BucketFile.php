@@ -3,6 +3,7 @@ namespace App\Bucket;
 
 use Seriti\Tools\Upload;
 
+
 class BucketFile extends Upload 
 {
   
@@ -29,7 +30,7 @@ class BucketFile extends Upload
         $param['label']     = 'name';
         $param['child_col'] = 'location_id';
         $param['child_prefix'] = $id_prefix;
-        $param['show_sql'] = 'SELECT CONCAT("Bucket: ",name) FROM '.$param['table'] .' WHERE bucket_id = {KEY_VAL}';
+        $param['show_sql'] = 'SELECT CONCAT("Bucket: ",`name`) FROM `'.$param['table'] .'` WHERE `bucket_id` = "{KEY_VAL}"';
         $this->setupMaster($param);
 
         $this->addAction('check_box');
