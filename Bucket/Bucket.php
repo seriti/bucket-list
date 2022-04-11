@@ -21,15 +21,20 @@ class Bucket extends Table
         $config = $this->getContainer('config');
 
         $user_access = $config->get('user','access');
+
+        //$this->user_access_level and $this->user_id set in parent::setup() above
+        if(isset(ACCESS_RANK[$this->user_access_level])) $this->access_rank = ACCESS_RANK[$this->user_access_level];
+
         $access_select = [];
         foreach($user_access as $access) {
             $name = $access;
             if($name === 'GOD') $name = 'MASTER';
-            $access_select[$access] = $name;
+            if(ACCESS_RANK[$access] >= $this->access_rank) {
+                $access_select[$access] = $name;   
+            }
         }
      
-        //$this->user_access_level and $this->user_id set in parent::setup() above
-        if(isset(ACCESS_RANK[$this->user_access_level])) $this->access_rank = ACCESS_RANK[$this->user_access_level];
+        
 
         $this->addTableCol(array('id'=>'bucket_id','type'=>'INTEGER','title'=>'Bucket ID','key'=>true,'key_auto'=>true,'list'=>false));
         $this->addTableCol(array('id'=>'name','type'=>'STRING','title'=>'Bucket name'));
