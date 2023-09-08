@@ -24,6 +24,8 @@ class BucketFile extends Upload
         }
         
 
+        $this->addSearch(['file_name_orig','file_size','file_date'],['rows'=>2]);
+
         $param=[];
         $param['table']     = TABLE_PREFIX.'bucket';
         $param['key']       = 'bucket_id';
